@@ -50,6 +50,7 @@ def load_data():
                 cursor.execute(insert_transactions, [transaction['id'],
                                transaction['amount'], transaction['vendor'], transaction['category_name'], transaction['user_id']])
             CONNECTOR.commit()
+            CONNECTOR.close()
     except Exception as e:
         print(e)
 
