@@ -1,0 +1,69 @@
+{
+    "Users": [{"user_id": 0, "balance": 0 }],
+    "Categories": [
+      {"category_name": "Housing" },
+      {"category_name": "Transportation" },
+      {"category_name": "Food" },
+      {"category_name": "Clothing" },
+      {"category_name": "Healthcare" }
+    ],    
+    "Transactions": [
+      {
+        "id": 0,
+        "amount": 10,
+        "vendor": "super yoda",
+        "category_name": "Food",
+        "user_id": 0
+      },
+      {
+        "id": 1,
+        "amount": -500,
+        "vendor": "estee lauder",
+        "category_name": "Healthcare",
+        "user_id": 0
+      }, 
+      {
+        "id": 2,
+        "amount": -100,
+        "vendor": "b pharam",
+        "category_name": "Healthcare",
+        "user_id": 0
+      }, 
+      {
+        "id": 3,
+        "amount": 200,
+        "vendor": "laundry services",
+        "category_name": "Housing",
+        "user_id": 0
+      }, 
+      {
+        "id": 4,
+        "amount": 45,
+        "vendor": "tres",
+        "category_name": "Clothing",
+        "user_id": 0
+      }, 
+      {
+        "id": 5,
+        "amount": -600,
+        "vendor": "story online",
+        "category_name": "Clothing",
+        "user_id": 0
+      },
+      {
+        "id": 6,
+        "amount": -300,
+        "vendor": "nike",
+        "category_name": "Clothing",
+        "user_id": 0
+      },
+      { 
+        "id": 7,
+        "amount": -340,
+        "vendor": "moovit",
+        "category_name": "Transportation",
+        "user_id": 0
+      }
+
+    ]
+  }
