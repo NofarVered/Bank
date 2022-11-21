@@ -10,7 +10,7 @@ DELETE_TRANSACTION_BY_ID = """DELETE FROM Transactions WHERE id = %s"""
 
 GET_ALL_TRANSACTIONS_BY_USER_ID = """SELECT * FROM Transactions WHERE user_id = %s"""
 
-GET_EXPENSES_BY_CATEGORIES = """SELECT category_name, SUM(amount) as total
+GET_USER_EXPENSES_BY_CATEGORIES = """SELECT category_name, SUM(amount) as total
                                 FROM Transactions 
                                 WHERE user_id = %s 
                                 GROUP BY category"""

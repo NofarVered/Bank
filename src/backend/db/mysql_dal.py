@@ -48,22 +48,34 @@ class MysqlDal(Dal):
         return len(result) != 0
 
     def _update_user_balance(self, user_id: int, amount: int) -> None:
-        pass
+        user_record = self._execute_select_one_query(GET_USER_BY_ID, [user_id])
+        user = User(**user_record)
+        new_balance = user.balance + amount
+        self._execute_insert_query(UPDATE_BALANCE_OF_USER, [
+                                   new_balance, user_id])
 
     def add_transaction(self, transaction: Transaction) -> None:
-        pass
+        self._execute_insert_query(INSERT_TRANSACTION, [
+                                   transaction.id, transaction.amount, transaction.vendor, transaction.category_name, transaction.user_id])
+        self._update_user_balance(transaction.user_id, transaction.amount)
 
     def delete_transaction(self, transaction: Transaction) -> None:
-        pass
+        self._execute_insert_query(DELETE_TRANSACTION_BY_ID, [transaction.id])
+        self._update_user_balance(transaction.user_id, -1 * transaction.amount)
 
     def get_all_transactions_by_user_id(self, user_id: int) -> List[Transaction]:
-        pass
+        result = self._execute_select_all_query(GET_TRANSACTION_BY_ID, user_id)
+        return [Transaction(**record) for record in result]
 
-    def get_all_expenses_by_category(self) -> Dict[str, float]:
-        pass
+    def get_all_expenses_by_category(self, user_id):
+        result = self._execute_select_all_query(
+            GET_USER_EXPENSES_BY_CATEGORIES, user_id)
+        return result
 
     def get_user_balance(self, user_id: int) -> float:
-        pass
+        user_record = self._execute_select_one_query(GET_USER_BY_ID, [user_id])
+        user = User(**user_record)
+        return user.balance
 
 
 db_manager: Dal = MysqlDal()
