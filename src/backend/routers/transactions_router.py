@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Response, status, HTTPException, Request
 from db import db_manager
 from db.utils import CategoryIdNotExist, UserIdNotExist, TransactionIdNotExist
-from ..models import *
+from models import *
 
 router = APIRouter()
 

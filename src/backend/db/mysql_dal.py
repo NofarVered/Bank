@@ -1,8 +1,8 @@
 import pymysql
 from .dal import Dal
 from typing import List, Dict
-from ..models import *
-from utils import *
+from models import *
+from .utils import *
 
 
 class MysqlDal(Dal):

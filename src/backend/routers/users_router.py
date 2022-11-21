@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Response, status, HTTPException, Request
 from db import db_manager
 from db.utils import CategoryIdNotExist, UserIdNotExist, TransactionIdNotExist
-from ..models import *
+from models import *
 
 router = APIRouter()
 
@@ -12,6 +12,7 @@ def get_transactions(user_id: str):
     return {"transactions": transactions}
 
 
+# V
 @router.get('/users/{user_id}/balance')
 def get_balance(user_id: str):
     try:

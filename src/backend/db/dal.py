@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List, Dict
-from ..models import *
+from models import *
 
 
 class Dal(ABC):
