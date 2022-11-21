@@ -20,5 +20,11 @@ def get_balance(user_id: str):
 
 @router.get('/users/{user_id}/breakdown')
 def get_breakdown(user_id: str):
-    breakdown = db_manager.get_all_expenses_by_category(int(user_id))
-    return {"breakdown": breakdown}
+    try:
+        breakdown = db_manager.get_all_expenses_by_category(int(user_id))
+        return {"breakdown": breakdown}
+    except UserIdNotExist as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=e.message,
+        )
