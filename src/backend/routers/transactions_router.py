@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Response, status, HTTPException, Request
 from db import db_manager
-from db.utils import CategoryIdNotExist, UserIdNotExist, TransactionIdNotExist
+from db.utils import CategoryNotFound, UserNotFound, TransactionNotFound
 from models import *
 
 router = APIRouter()
@@ -13,14 +13,14 @@ async def add_transaction(request: Request):
         transaction = Transaction(**req)
         db_manager.add_transaction(transaction)
         return {"message": "add_transaction success", "id": transaction.id}
-    except CategoryIdNotExist as e:
+    except CategoryNotFound as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail=e.message,
         )
-    except UserIdNotExist as e:
+    except UserNotFound as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail=e.message,
         )
 
@@ -31,8 +31,8 @@ def delete_transaction(transaction_id: str):
 
         db_manager.delete_transaction(transaction_id)
         return {"message": "delete_transaction success"}
-    except TransactionIdNotExist as e:
+    except TransactionNotFound as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail=e.message,
         )

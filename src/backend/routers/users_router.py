@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Response, status, HTTPException, Request
 from db import db_manager
-from db.utils import UserIdNotExist
+from db.utils import UserNotFound
 from models import *
 
 router = APIRouter()
@@ -11,9 +11,9 @@ def get_transactions(user_id: str):
     try:
         transactions = db_manager.get_all_transactions_by_user_id(int(user_id))
         return {"transactions": transactions}
-    except UserIdNotExist as e:
+    except UserNotFound as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail=e.message,
         )
 
@@ -23,9 +23,9 @@ def get_balance(user_id: str):
     try:
         balance = db_manager.get_user_balance(int(user_id))
         return {"balance": balance}
-    except UserIdNotExist as e:
+    except UserNotFound as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail=e.message,
         )
 
@@ -35,7 +35,7 @@ def get_breakdown(user_id: str):
     try:
         breakdown = db_manager.get_all_expenses_by_category(int(user_id))
         return {"breakdown": breakdown}
-    except UserIdNotExist as e:
+    except UserNotFound as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=e.message,

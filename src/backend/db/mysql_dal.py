@@ -59,16 +59,16 @@ class MysqlDal(Dal):
 
     def add_transaction(self, transaction: Transaction) -> None:
         if not self._is_user_exist(transaction.user_id):
-            raise UserIdNotExist()
+            raise UserNotFound()
         if not self._is_category_exist(transaction.category_name):
-            raise CategoryIdNotExist()
+            raise CategoryNotFound()
         self._execute_insert_query(INSERT_TRANSACTION, [
                                    transaction.id, transaction.amount, transaction.vendor, transaction.category_name, transaction.user_id])
         self._update_user_balance(transaction.user_id, transaction.amount)
 
     def delete_transaction(self, transaction_id: int) -> None:
         if not self._is_transaction_exist(transaction_id):
-            raise TransactionIdNotExist()
+            raise TransactionNotFound()
         record = self._get_transaction_by_id(transaction_id)
         transaction = Transaction(**record)
         self._execute_insert_query(DELETE_TRANSACTION_BY_ID, [transaction.id])
@@ -76,21 +76,21 @@ class MysqlDal(Dal):
 
     def get_all_transactions_by_user_id(self, user_id: int) -> List[Transaction]:
         if not self._is_user_exist(user_id):
-            raise UserIdNotExist()
+            raise UserNotFound()
         result = self._execute_select_all_query(
             GET_ALL_TRANSACTIONS_BY_USER_ID, [user_id])
         return [Transaction(**record) for record in result]
 
     def get_all_expenses_by_category(self, user_id):
         if not self._is_user_exist(user_id):
-            raise UserIdNotExist()
+            raise UserNotFound()
         result = self._execute_select_all_query(
             GET_USER_EXPENSES_BY_CATEGORIES, [user_id])
         return result
 
     def get_user_balance(self, user_id: int) -> float:
         if not self._is_user_exist(user_id):
-            raise UserIdNotExist()
+            raise UserNotFound()
         user_record = self._execute_select_one_query(GET_USER_BY_ID, [user_id])
         user = User(**user_record)
         return user.balance
