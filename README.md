@@ -120,7 +120,7 @@ Response:
 Request:
 
 ```
-http://localhost:8000/transactions
+POST http://localhost:8000/transactions
         {
         "id": 2,
         "amount": -100,
