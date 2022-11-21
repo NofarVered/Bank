@@ -6,6 +6,12 @@ from ..models import *
 router = APIRouter()
 
 
+@router.get("/users/{user_id}/transactions", status_code=status.HTTP_200_OK)
+def get_transactions(user_id: str):
+    transactions = db_manager.get_all_transactions_by_user_id(int(user_id))
+    return {"transactions": transactions}
+
+
 @router.get('/users/{user_id}/balance')
 def get_balance(user_id: str):
     try:

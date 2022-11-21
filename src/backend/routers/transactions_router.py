@@ -6,12 +6,6 @@ from ..models import *
 router = APIRouter()
 
 
-@router.get("transactions/{user_id}", status_code=status.HTTP_200_OK)
-def get_transactions(user_id: str):
-    transactions = db_manager.get_all_transactions_by_user_id(int(user_id))
-    return {"transactions": transactions}
-
-
 @router.post("transactions", status_code=status.HTTP_201_CREATED)
 async def add_transaction(request: Request):
     try:
