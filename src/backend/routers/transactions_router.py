@@ -6,7 +6,7 @@ from models import *
 router = APIRouter()
 
 
-@router.post("transactions", status_code=status.HTTP_201_CREATED)
+@router.post("/transactions", status_code=status.HTTP_201_CREATED)
 async def add_transaction(request: Request):
     try:
         req = await request.json()
@@ -25,9 +25,10 @@ async def add_transaction(request: Request):
         )
 
 
-@router.delete("transactions/{transaction_id}", status_code=status.HTTP_200_OK)
+@router.delete("/transactions/{transaction_id}", status_code=status.HTTP_200_OK)
 def delete_transaction(transaction_id: str):
     try:
+
         db_manager.delete_transaction(transaction_id)
         return {"message": "delete_transaction success"}
     except TransactionIdNotExist as e:

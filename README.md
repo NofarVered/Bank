@@ -102,3 +102,39 @@ Response:
     ]
 }
 ```
+
+Request:
+
+```
+DELETE http://localhost:8000/transactions/2
+```
+
+Response:
+
+```
+{
+"message": "delete_transaction success"
+}
+```
+
+Request:
+
+```
+http://localhost:8000/transactions
+        {
+        "id": 2,
+        "amount": -100,
+        "vendor": "b pharam",
+        "category_name": "Healthcare",
+        "user_id": 0
+      }
+```
+
+Response:
+
+```
+{
+    "message": "add_transaction success",
+    "id": 2
+}
+```
