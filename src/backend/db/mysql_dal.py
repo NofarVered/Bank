@@ -36,16 +36,16 @@ class MysqlDal(Dal):
 
     def _is_transaction_exist(self, id: int) -> bool:
         result = self._execute_select_one_query(GET_TRANSACTION_BY_ID, [id])
-        return len(result) != 0
+        return result != None
 
     def _is_user_exist(self, user_id: int) -> bool:
         result = self._execute_select_one_query(GET_USER_BY_ID, [user_id])
-        return len(result) != 0
+        return result != None
 
     def _is_category_exist(self, category_name: str) -> bool:
         result = self._execute_select_one_query(
             GET_CATEGORY_BY_NAME, [category_name])
-        return len(result) != 0
+        return result != None
 
     def _update_user_balance(self, user_id: int, amount: int) -> None:
         user_record = self._execute_select_one_query(GET_USER_BY_ID, [user_id])

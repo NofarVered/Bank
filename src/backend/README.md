@@ -128,3 +128,31 @@ Response:
     "id": 2
 }
 ```
+
+## Error handeling example
+
+Request:
+
+```
+POST http://localhost:8000/transactions
+```
+
+Body:
+
+```
+{
+"id": 2,
+"amount": -100,
+"vendor": "b pharam",
+"category_name": "Healthhhhhhhhhcare",
+"user_id": 0
+}
+```
+
+Response:
+
+```
+{
+"detail": "ERROR: category id does not exist."
+}
+```
