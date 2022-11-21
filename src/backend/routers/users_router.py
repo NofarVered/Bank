@@ -12,7 +12,6 @@ def get_transactions(user_id: str):
     return {"transactions": transactions}
 
 
-# V
 @router.get('/users/{user_id}/balance')
 def get_balance(user_id: str):
     try:

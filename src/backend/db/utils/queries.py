@@ -13,7 +13,7 @@ GET_ALL_TRANSACTIONS_BY_USER_ID = """SELECT * FROM Transactions WHERE user_id = 
 GET_USER_EXPENSES_BY_CATEGORIES = """SELECT category_name, SUM(amount) as total
                                 FROM Transactions 
                                 WHERE user_id = %s 
-                                GROUP BY category"""
+                                GROUP BY category_name"""
 
 UPDATE_BALANCE_OF_USER = """UPDATE Users
                             SET balance = %s

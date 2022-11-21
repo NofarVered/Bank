@@ -69,12 +69,13 @@ class MysqlDal(Dal):
         self._update_user_balance(transaction.user_id, -1 * transaction.amount)
 
     def get_all_transactions_by_user_id(self, user_id: int) -> List[Transaction]:
-        result = self._execute_select_all_query(GET_TRANSACTION_BY_ID, user_id)
+        result = self._execute_select_all_query(
+            GET_ALL_TRANSACTIONS_BY_USER_ID, [user_id])
         return [Transaction(**record) for record in result]
 
     def get_all_expenses_by_category(self, user_id):
         result = self._execute_select_all_query(
-            GET_USER_EXPENSES_BY_CATEGORIES, user_id)
+            GET_USER_EXPENSES_BY_CATEGORIES, [user_id])
         return result
 
     def get_user_balance(self, user_id: int) -> float:
