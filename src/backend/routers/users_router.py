@@ -37,6 +37,6 @@ def get_breakdown(user_id: str):
         return {"breakdown": breakdown}
     except UserNotFound as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail=e.message,
         )
